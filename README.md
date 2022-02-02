@@ -20,6 +20,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Assignment Details
 
+[online documentation](https://flutter.dev/…
+
 After setting up the project, complete all the tasks.
 
 Your app should :-

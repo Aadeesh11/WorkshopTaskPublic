@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:workshop_task/screen/todoScreen.dart';
+import 'package:workshop_task/screen/todo_screen.dart';
 
 Widget createHomeScreen() => const MaterialApp(
       home: TodoScreen(),

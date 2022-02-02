@@ -1,15 +1,18 @@
-# workshop_task
+# Workshop Task
 
-A new Flutter project.
+## About the Project
+
+This project is a flutter build native interface to test flutter enthusiast after the workshop.This is a simple TODO LIST app which has incomplete logic and functioning your task is to complete all the todos and make this app fully functional.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For setting up the development environment, follow the steps given below.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Clone this repository after forking using `git clone https://github.com/Aadeesh11/WorkshopTaskPublic.git`
+- `cd` into `WorkshopTaskPublic`
+- Check for flutter setup and connected devices using `flutter doctor`
+- Get all the dependencies using `flutter pub get`
+- Run the app using `flutter run`
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,

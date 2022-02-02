@@ -4,14 +4,14 @@ class TodoList {
   final List<Todo> _allTodos = [];
 
   List<Todo> allTodos() {
-    //TODO:
+    //TODO:Add logic to complete
   }
 
   void addTodo(Todo todo) {
-    //TODO:
+    //TODO:Add logic to add a todo
   }
 
   void deleteTodo(Todo todo) {
-    //TODO:
+    //TODO:Add logic to delete todo
   }
 }

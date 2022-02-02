@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:workshop_task/models/todo.dart';
-import 'package:workshop_task/models/todoList.dart';
+import 'package:workshop_task/models/todo_list.dart';
 
 void main() {
   group('testing todo list ', () {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workshop_task/models/todoList.dart';
-import 'package:workshop_task/widgets/addTodoDialogue.dart';
-import 'package:workshop_task/widgets/todoListItem.dart';
+import 'package:workshop_task/models/todo_list.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);

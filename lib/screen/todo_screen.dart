@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo_list.dart';
-import 'package:workshop_task/widgets/add_todo_dialogue.dart';
-import 'package:workshop_task/widgets/todo_list_item.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
@@ -12,15 +10,18 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   TodoList todoList = TodoList();
-  List<Widget> LisWig = <Widget>[];
+  List<Widget> lisWig = <Widget>[];
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  Widget wigbody = Container(
-    child: Center(
-      child: Text("No Todos Added"),
-    ),
+  Widget wigbody = Row(
+    children: const [
+      Center(
+        child: Text("No Todos Added"),
+      )
+    ],
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +29,8 @@ class _TodoScreenState extends State<TodoScreen> {
         appBar: AppBar(
           title: const Text("Your Todos"),
         ),
-
-        //TODO: Add todo button with this icon => "+".
         floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onPressed: () {
               showDialog(
                   context: context,
@@ -39,7 +38,7 @@ class _TodoScreenState extends State<TodoScreen> {
                     return Dialog(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0)),
-                      child: Container(
+                      child: SizedBox(
                         height: 200,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -49,12 +48,12 @@ class _TodoScreenState extends State<TodoScreen> {
                             children: [
                               TextField(
                                 controller: titlecontroller,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: "Title", hintText: 'Title'),
                               ),
                               TextField(
                                   controller: desccontroller,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: "Description",
                                       hintText: 'Description')),
                               SizedBox(
@@ -70,7 +69,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                               title: Text(titlecontroller.text),
                                               subtitle:
                                                   Text(desccontroller.text),
-                                              leading: CircleAvatar(
+                                              leading: const CircleAvatar(
                                                 child: Text("1"),
                                               ),
                                             ),
@@ -81,7 +80,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                                   builder: (BuildContext
                                                       currentcontext) {
                                                     return AlertDialog(
-                                                      content: Text(
+                                                      content: const Text(
                                                           "Are you sure you want to delete this todo?"),
                                                       actions: [
                                                         TextButton(
@@ -94,16 +93,18 @@ class _TodoScreenState extends State<TodoScreen> {
                                                                 Navigator.of(
                                                                         currentcontext)
                                                                     .pop();
-                                                                wigbody =
-                                                                    Container(
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                        "No Todos Added"),
-                                                                  ),
+                                                                wigbody = Row(
+                                                                  children: const [
+                                                                    Center(
+                                                                      child: Text(
+                                                                          "No Todos Added"),
+                                                                    )
+                                                                  ],
                                                                 );
                                                               });
                                                             },
-                                                            child: Text("Yes")),
+                                                            child: const Text(
+                                                                "Yes")),
                                                         TextButton(
                                                             onPressed: () {
                                                               setState(() {
@@ -112,7 +113,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                                                     .pop();
                                                               });
                                                             },
-                                                            child: Text("No"))
+                                                            child: const Text(
+                                                                "No"))
                                                       ],
                                                     );
                                                   });
@@ -122,7 +124,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                       );
                                     });
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Submit",
                                     style: TextStyle(color: Colors.blue),
                                   ),
@@ -135,7 +137,6 @@ class _TodoScreenState extends State<TodoScreen> {
                     );
                   });
             }),
-        body: //TODO: Add list view displaying all todo.
-            wigbody);
+        body: wigbody);
   }
 }

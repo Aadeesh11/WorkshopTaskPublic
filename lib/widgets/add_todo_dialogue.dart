@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo_list.dart';
 import 'package:workshop_task/models/todo.dart';
-import 'package:workshop_task/screen/todo_screen.dart';
+
 import 'package:workshop_task/widgets/todo_list_item.dart';
 
 class AddTodoDialogue extends StatefulWidget {
@@ -15,7 +15,7 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
   var i = 0;
-  List<Widget> LisWig = <Widget>[];
+  List<Widget> lisWig = <Widget>[];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +25,6 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          //TODO: Take input of title. and description.
           Material(
               child: Container(
                   width: 2000,
@@ -33,8 +32,8 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                       vertical: 4.0, horizontal: 4.0),
                   child: TextField(
                     controller: titlecontroller,
-                    decoration:
-                        InputDecoration(hintText: "Title", labelText: "Title"),
+                    decoration: const InputDecoration(
+                        hintText: "Title", labelText: "Title"),
                   ))),
           Material(
               child: Container(
@@ -43,7 +42,7 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                       vertical: 4.0, horizontal: 4.0),
                   child: TextField(
                     controller: desccontroller,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Description", labelText: "Description"),
                   ))),
           Material(
@@ -57,22 +56,22 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                         setState(() {
                           Navigator.of(context).pop();
 
-                          Todo ListItem = Todo(
+                          Todo listItem = Todo(
                               title: titlecontroller.text.toString(),
                               description: desccontroller.text.toString());
 
                           var todoList = TodoList();
-                          todoList.addTodo(ListItem);
+                          todoList.addTodo(listItem);
 
-                          TodoListItem WigItem = TodoListItem(
+                          TodoListItem wigItem = TodoListItem(
                             todo: todoList.allTodos()[i],
                             index: i + 1,
                           );
 
-                          LisWig.add(WigItem);
+                          lisWig.add(wigItem);
                         });
                       },
-                      child: Text('Submit',
+                      child: const Text('Submit',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )))))

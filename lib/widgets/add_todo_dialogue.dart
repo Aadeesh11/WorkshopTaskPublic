@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo_list.dart';
 import 'package:workshop_task/models/todo.dart';
 
-import 'package:workshop_task/widgets/todo_list_item.dart';
-
 class AddTodoDialogue extends StatefulWidget {
   const AddTodoDialogue({Key key}) : super(key: key);
 
@@ -14,69 +12,46 @@ class AddTodoDialogue extends StatefulWidget {
 class _AddTodoDialogueState extends State<AddTodoDialogue> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
-  var i = 0;
+  int i = 0;
+  TodoList listItem = TodoList();
   List<Widget> lisWig = <Widget>[];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Material(
-              child: Container(
-                  width: 2000,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 4.0, horizontal: 4.0),
-                  child: TextField(
-                    controller: titlecontroller,
-                    decoration: const InputDecoration(
-                        hintText: "Title", labelText: "Title"),
-                  ))),
-          Material(
-              child: Container(
-                  width: 2000,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 4.0, horizontal: 4.0),
-                  child: TextField(
-                    controller: desccontroller,
-                    decoration: const InputDecoration(
-                        hintText: "Description", labelText: "Description"),
-                  ))),
-          Material(
-              child: Container(
-                  width: 2000,
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 4.0, horizontal: 4.0),
-                  child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          Navigator.of(context).pop();
+    return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+        child: SizedBox(
+            height: 200,
+            child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TextField(
+                        controller: titlecontroller,
+                        decoration: const InputDecoration(labelText: "Title"),
+                      ),
+                      TextField(
+                        controller: desccontroller,
+                        decoration:
+                            const InputDecoration(labelText: "Description"),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              if (titlecontroller.text.isNotEmpty &&
+                                  desccontroller.text.isNotEmpty) {
+                                Todo content = Todo(
+                                    title: titlecontroller.text,
+                                    description: desccontroller.text);
 
-                          Todo listItem = Todo(
-                              title: titlecontroller.text.toString(),
-                              description: desccontroller.text.toString());
-
-                          var todoList = TodoList();
-                          todoList.addTodo(listItem);
-
-                          TodoListItem wigItem = TodoListItem(
-                            todo: todoList.allTodos()[i],
-                            index: i + 1,
-                          );
-
-                          lisWig.add(wigItem);
-                        });
-                      },
-                      child: const Text('Submit',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          )))))
-        ],
-      ),
-    );
+                                listItem.addTodo(content);
+                                titlecontroller.clear();
+                                desccontroller.clear();
+                              }
+                            });
+                          },
+                          child: const Text("Submit"))
+                    ]))));
   }
 }

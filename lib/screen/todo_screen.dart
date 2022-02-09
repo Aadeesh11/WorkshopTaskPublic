@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workshop_task/models/todo.dart';
-import 'package:workshop_task/models/todo_list.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
@@ -10,13 +8,12 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  TodoList todoList = TodoList();
-  final List<Todo> _allTodos = <Todo>[];
-  List<Widget> lisWig = <Widget>[];
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Widget wigbody = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: const [
       Center(
         child: Text("No Todos Added"),
@@ -99,6 +96,12 @@ class _TodoScreenState extends State<TodoScreen> {
                                                                           currentcontext)
                                                                       .pop();
                                                                   wigbody = Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
                                                                     children: const [
                                                                       Center(
                                                                         child: Text(

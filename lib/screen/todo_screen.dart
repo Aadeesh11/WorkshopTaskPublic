@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workshop_task/models/todo.dart';
 import 'package:workshop_task/models/todo_list.dart';
 
 class TodoScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   TodoList todoList = TodoList();
+  final List<Todo> _allTodos = <Todo>[];
   List<Widget> lisWig = <Widget>[];
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
@@ -60,69 +62,73 @@ class _TodoScreenState extends State<TodoScreen> {
                                 width: 320.0,
                                 child: TextButton(
                                   onPressed: () {
-                                    setState(() {
-                                      Navigator.of(context).pop();
-                                      wigbody = ListView(
-                                        children: [
-                                          GestureDetector(
-                                            child: ListTile(
-                                              title: Text(titlecontroller.text),
-                                              subtitle:
-                                                  Text(desccontroller.text),
-                                              leading: const CircleAvatar(
-                                                child: Text("1"),
+                                    if (titlecontroller.text.isNotEmpty &&
+                                        desccontroller.text.isNotEmpty) {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        wigbody = ListView(
+                                          children: [
+                                            GestureDetector(
+                                              child: ListTile(
+                                                title:
+                                                    Text(titlecontroller.text),
+                                                subtitle:
+                                                    Text(desccontroller.text),
+                                                leading: const CircleAvatar(
+                                                  child: Text("1"),
+                                                ),
                                               ),
-                                            ),
-                                            onDoubleTap: () {
-                                              showDialog(
-                                                  context: _scaffoldKey
-                                                      .currentContext,
-                                                  builder: (BuildContext
-                                                      currentcontext) {
-                                                    return AlertDialog(
-                                                      content: const Text(
-                                                          "Are you sure you want to delete this todo?"),
-                                                      actions: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              setState(() {
-                                                                titlecontroller
-                                                                    .clear();
-                                                                desccontroller
-                                                                    .clear();
-                                                                Navigator.of(
-                                                                        currentcontext)
-                                                                    .pop();
-                                                                wigbody = Row(
-                                                                  children: const [
-                                                                    Center(
-                                                                      child: Text(
-                                                                          "No Todos Added"),
-                                                                    )
-                                                                  ],
-                                                                );
-                                                              });
-                                                            },
-                                                            child: const Text(
-                                                                "Yes")),
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              setState(() {
-                                                                Navigator.of(
-                                                                        currentcontext)
-                                                                    .pop();
-                                                              });
-                                                            },
-                                                            child: const Text(
-                                                                "No"))
-                                                      ],
-                                                    );
-                                                  });
-                                            },
-                                          )
-                                        ],
-                                      );
-                                    });
+                                              onDoubleTap: () {
+                                                showDialog(
+                                                    context: _scaffoldKey
+                                                        .currentContext,
+                                                    builder: (BuildContext
+                                                        currentcontext) {
+                                                      return AlertDialog(
+                                                        content: const Text(
+                                                            "Are you sure you want to delete this todo?"),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  titlecontroller
+                                                                      .clear();
+                                                                  desccontroller
+                                                                      .clear();
+                                                                  Navigator.of(
+                                                                          currentcontext)
+                                                                      .pop();
+                                                                  wigbody = Row(
+                                                                    children: const [
+                                                                      Center(
+                                                                        child: Text(
+                                                                            "No Todos Added"),
+                                                                      )
+                                                                    ],
+                                                                  );
+                                                                });
+                                                              },
+                                                              child: const Text(
+                                                                  "Yes")),
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  Navigator.of(
+                                                                          currentcontext)
+                                                                      .pop();
+                                                                });
+                                                              },
+                                                              child: const Text(
+                                                                  "No"))
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                            )
+                                          ],
+                                        );
+                                      });
+                                    }
                                   },
                                   child: const Text(
                                     "Submit",

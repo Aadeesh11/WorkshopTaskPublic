@@ -21,31 +21,37 @@ class _TodoScreenState extends State<TodoScreen> {
         title: const Text("Your Todos"),
       ),
       body: todoListObj.allTodos().isEmpty
-          ? const Center(child: Text("No TODOs added yet."))
+          ? const Center(child: Text("No ToDo's added"))
           : ListView.builder(
               itemCount: todoListObj.allTodos().length,
               itemBuilder: (context, index) {
-                return Card(
-                    child: ListTile(
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Center(
-                            child: Text('Long Press TODO to Delete'),
-                            heightFactor: 1),
-                        duration: Duration(milliseconds: 1500),
-                      ),
-                    );
-                  },
-                  onLongPress: () {
+                return GestureDetector(
+                  child: ListTile(
+                    title: Text(todoListObj.allTodos()[index].title),
+                    subtitle: Text(todoListObj.allTodos()[index].description),
+                    leading: CircleAvatar(
+                      child: Text((index + 1).toString()),
+                    ),
+                  ),
+                  // onTap: () {
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(
+                  //       content: Center(
+                  //           child: Text('Long Press ToDo to Delete'),
+                  //           heightFactor: 1),
+                  //       duration: Duration(milliseconds: 1500),
+                  //     ),
+                  //   );
+                  // },
+                  onDoubleTap: () {
                     showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
                               title: const Text(
-                                  "Are you sure you want to delete this TODO?"),
+                                  "Are you sure you want to delete this ToDo?"),
                               actions: [
                                 TextButton(
-                                  child: const Text("YES"),
+                                  child: const Text("Yes"),
                                   onPressed: () {
                                     setState(() {
                                       todoListObj.deleteTodo(
@@ -55,7 +61,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text("NO"),
+                                  child: const Text("No"),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
@@ -63,12 +69,7 @@ class _TodoScreenState extends State<TodoScreen> {
                               ],
                             ));
                   },
-                  title: Text(todoListObj.allTodos()[index].title),
-                  subtitle: Text(todoListObj.allTodos()[index].description),
-                  leading: CircleAvatar(
-                    child: Text((index + 1).toString()),
-                  ),
-                ));
+                );
               },
             ),
       floatingActionButton: FloatingActionButton(
@@ -91,19 +92,21 @@ class _TodoScreenState extends State<TodoScreen> {
                     ]),
                     actions: [
                       TextButton(
-                        child: const Text("SUBMIT"),
+                        child: const Center(child: Text("Submit")),
                         onPressed: () {
                           var task = Todo(
                               title: titleController.text,
                               description: descController.text);
-                          titleController.clear();
-                          descController.clear();
-                          //print(task.title);
-                          //print(task.description);
-                          setState(() {
-                            todoListObj.addTodo(task);
-                          });
-                          Navigator.pop(context);
+                          if (task.title != "" && task.description != "") {
+                            titleController.clear();
+                            descController.clear();
+                            //print(task.title);
+                            //print(task.description);
+                            setState(() {
+                              todoListObj.addTodo(task);
+                            });
+                            Navigator.pop(context);
+                          }
                         },
                       )
                     ],

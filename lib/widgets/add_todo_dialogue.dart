@@ -8,6 +8,10 @@ class AddTodoDialogue extends StatefulWidget {
 }
 
 class _AddTodoDialogueState extends State<AddTodoDialogue> {
+  final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller2 = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +21,18 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
         mainAxisSize: MainAxisSize.min,
         children: [
           //TODO: Take input of title. and description.
-          TextField(),
-          TextField(),
-          TextButton(),
+          TextField(
+            controller: controller1,
+            decoration: const InputDecoration(labelText: "Title"),
+          ),
+          TextField(
+            controller: controller2,
+            decoration: const InputDecoration(labelText: "Description"),
+          ),
+          TextButton(
+            child: const Text("Submit"),
+            onPressed: () {},
+          ),
         ],
       ),
     );

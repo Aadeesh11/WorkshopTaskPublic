@@ -12,7 +12,6 @@ class TodoScreen extends StatefulWidget {
 class _TodoScreenState extends State<TodoScreen> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   TodoList todoList = TodoList();
 
@@ -91,51 +90,50 @@ class _TodoScreenState extends State<TodoScreen> {
               });
         },
       ),
-      body: //TODO: Add list view displaying all todo.
-          todoList.allTodos().isNotEmpty
-              ? ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: todoList.allTodos().length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(todoList.allTodos()[index].title,
-                          style: const TextStyle(fontSize: 18.0)),
-                      subtitle: Text(todoList.allTodos()[index].description),
-                      leading: CircleAvatar(child: Text("${index + 1}")),
-                      onTap: () {
-                        const snackBar =
-                            SnackBar(content: Text("Long Press to Delete!!"));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
-                      onLongPress: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context_) {
-                              return AlertDialog(
-                                content: const Text(
-                                    "Are you sure you want to delete this Todo?"),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          todoList.deleteTodo(
-                                              todoList.allTodos()[index]);
-                                          Navigator.of(context_).pop();
-                                        });
-                                      },
-                                      child: const Text("Yes")),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context_).pop();
-                                      },
-                                      child: const Text("No"))
-                                ],
-                              );
-                            });
-                      },
-                    );
-                  })
-              : const Center(child: Text("No Todo's added")),
+      body: todoList.allTodos().isNotEmpty
+          ? ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: todoList.allTodos().length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(todoList.allTodos()[index].title,
+                      style: const TextStyle(fontSize: 18.0)),
+                  subtitle: Text(todoList.allTodos()[index].description),
+                  leading: CircleAvatar(child: Text("${index + 1}")),
+                  onTap: () {
+                    const snackBar =
+                        SnackBar(content: Text("Long Press to Delete!!"));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  onLongPress: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context_) {
+                          return AlertDialog(
+                            content: const Text(
+                                "Are you sure you want to delete this Todo?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      todoList.deleteTodo(
+                                          todoList.allTodos()[index]);
+                                      Navigator.of(context_).pop();
+                                    });
+                                  },
+                                  child: const Text("Yes")),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context_).pop();
+                                  },
+                                  child: const Text("No"))
+                            ],
+                          );
+                        });
+                  },
+                );
+              })
+          : const Center(child: Text("No Todo's added")),
     );
   }
 }

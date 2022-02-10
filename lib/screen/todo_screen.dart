@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo_list.dart';
+import 'package:workshop_task/widgets/add_todo_dialogue.dart';
 
 class TodoScreen extends StatefulWidget {
+  //Update user interface - use statefulwidgets
   const TodoScreen({Key key}) : super(key: key);
 
   @override
@@ -15,12 +17,23 @@ class _TodoScreenState extends State<TodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Your Todos"),
+        title: const Text("My Tasks"),
       ),
-      //TODO: Add todo button with this icon => "+".
-      floatingActionButton: const FloatingActionButton(),
+      //Done//TODO: Add todo button with this icon => "+".
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add, size: 50),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddTodoDialogue(),
+              ));
+        },
+      ),
       body: //TODO: Add list view displaying all todo.
-          Container(),
+          Container(
+        child: Center(child: Text("Yay! No Pending Tasks")),
+      ),
     );
   }
 }

@@ -95,43 +95,39 @@ class _TodoScreenState extends State<TodoScreen> {
               padding: const EdgeInsets.all(8),
               itemCount: todoList.allTodos().length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(todoList.allTodos()[index].title,
-                      style: const TextStyle(fontSize: 18.0)),
-                  subtitle: Text(todoList.allTodos()[index].description),
-                  leading: CircleAvatar(child: Text("${index + 1}")),
-                  onTap: () {
-                    const snackBar =
-                        SnackBar(content: Text("Long Press to Delete!!"));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  },
-                  onLongPress: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context_) {
-                          return AlertDialog(
-                            content: const Text(
-                                "Are you sure you want to delete this Todo?"),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      todoList.deleteTodo(
-                                          todoList.allTodos()[index]);
+                return GestureDetector(
+                    onDoubleTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context_) {
+                            return AlertDialog(
+                              content: const Text(
+                                  "Are you sure you want to delete this Todo?"),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        todoList.deleteTodo(
+                                            todoList.allTodos()[index]);
+                                        Navigator.of(context_).pop();
+                                      });
+                                    },
+                                    child: const Text("Yes")),
+                                TextButton(
+                                    onPressed: () {
                                       Navigator.of(context_).pop();
-                                    });
-                                  },
-                                  child: const Text("Yes")),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context_).pop();
-                                  },
-                                  child: const Text("No"))
-                            ],
-                          );
-                        });
-                  },
-                );
+                                    },
+                                    child: const Text("No"))
+                              ],
+                            );
+                          });
+                    },
+                    child: ListTile(
+                      title: Text(todoList.allTodos()[index].title,
+                          style: const TextStyle(fontSize: 18.0)),
+                      subtitle: Text(todoList.allTodos()[index].description),
+                      leading: CircleAvatar(child: Text("${index + 1}")),
+                    ));
               })
           : const Center(child: Text("No Todo's added")),
     );

@@ -3,18 +3,16 @@ import 'package:workshop_task/models/todo_list.dart';
 import 'package:workshop_task/models/todo.dart';
 
 class AddTodoDialogue extends StatefulWidget {
-   const AddTodoDialogue({Key key}) : super(key: key);
+  const AddTodoDialogue({Key key}) : super(key: key);
 
   @override
   _AddTodoDialogueState createState() => _AddTodoDialogueState();
-  
-  
 }
 
 class _AddTodoDialogueState extends State<AddTodoDialogue> {
-   final TextEditingController titlecontroller = TextEditingController();
-   final TextEditingController desccontroller = TextEditingController();
-   int i = 0;
+  final TextEditingController titlecontroller = TextEditingController();
+  final TextEditingController desccontroller = TextEditingController();
+  int i = 0;
   TodoList listItem = TodoList();
   List<Widget> listWig = <Widget>[];
 
@@ -55,9 +53,6 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                             });
                           },
                           child: const Text("Submit"))
-                    ]
-                    )
-                    )
-                    )
-                    );
-  }}
+                    ]))));
+  }
+}

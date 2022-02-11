@@ -10,13 +10,13 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  var TodoListObject = TodoList();
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  var todoListObject = TodoList();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   Widget zeroTodos = Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
+    children: const [
       Center(
         child: Text("No ToDo's Added!"),
       )
@@ -27,21 +27,21 @@ class _TodoScreenState extends State<TodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Todos"),
+        title: const Text("Your Todos"),
       ),
-      body: (TodoListObject.allTodos().length == 0)
+      body: (todoListObject.allTodos().isEmpty)
           ? zeroTodos
           : ListView.builder(
-              itemCount: TodoListObject.allTodos().length,
+              itemCount: todoListObject.allTodos().length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                     child: ListTile(
-                      title: Text(TodoListObject.allTodos()[index].title),
+                      title: Text(todoListObject.allTodos()[index].title),
                       subtitle:
-                          Text(TodoListObject.allTodos()[index].description),
+                          Text(todoListObject.allTodos()[index].description),
                       leading: CircleAvatar(
                         child: Text("${index + 1}"),
-                        backgroundColor: Color(0xFF000000),
+                        backgroundColor: const Color(0xFF000000),
                       ),
                     ),
                     onDoubleTap: () {
@@ -49,21 +49,21 @@ class _TodoScreenState extends State<TodoScreen> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text(
+                              title: const Text(
                                   "Do you want to DELETE this ToDo from your list?"),
                               actions: [
                                 TextButton(
-                                  child: Text("Yes"),
+                                  child: const Text("Yes"),
                                   onPressed: () {
                                     setState(() {
-                                      TodoListObject.deleteTodo(
-                                          TodoListObject.allTodos()[index]);
+                                      todoListObject.deleteTodo(
+                                          todoListObject.allTodos()[index]);
                                       Navigator.of(context).pop();
                                     });
                                   },
                                 ),
                                 TextButton(
-                                  child: Text("No"),
+                                  child: const Text("No"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -90,7 +90,7 @@ class _TodoScreenState extends State<TodoScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Title:"),
+                              const Text("Title:"),
                               TextFormField(
                                 controller: titleEditingController,
                                 validator: (value) {
@@ -98,11 +98,11 @@ class _TodoScreenState extends State<TodoScreen> {
                                       ? null
                                       : "Invalid Field";
                                 },
-                                decoration:
-                                    InputDecoration(hintText: "Enter Title!"),
+                                decoration: const InputDecoration(
+                                    hintText: "Enter Title!"),
                               ),
-                              SizedBox(height: 10.0),
-                              Text("Description:"),
+                              const SizedBox(height: 10.0),
+                              const Text("Description:"),
                               TextFormField(
                                 controller: descEditingController,
                                 validator: (value) {
@@ -110,7 +110,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                       ? null
                                       : "Invalid Field";
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Enter Description!"),
                               ),
                             ])),
@@ -118,7 +118,7 @@ class _TodoScreenState extends State<TodoScreen> {
                       TextButton(
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text("Submit"),
                             ]),
                         onPressed: () {
@@ -127,7 +127,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                 title: titleEditingController.text,
                                 description: descEditingController.text);
                             setState(() {
-                              TodoListObject.addTodo(newTodo);
+                              todoListObject.addTodo(newTodo);
                             });
                             Navigator.of(context).pop();
                           }
@@ -137,9 +137,9 @@ class _TodoScreenState extends State<TodoScreen> {
                   );
                 });
           },
-          child: Icon(Icons.add, size: 35)),
+          child: const Icon(Icons.add, size: 35)),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF000000),
+        color: const Color(0xFF000000),
         child: Container(height: 50.0),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,

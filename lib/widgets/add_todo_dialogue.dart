@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:workshop_task/models/todo.dart';
+import 'package:workshop_task/models/todo_list.dart';
 import 'package:workshop_task/screen/todo_screen.dart';
 
 class AddTodoDialogue extends StatefulWidget {
@@ -11,6 +13,15 @@ class AddTodoDialogue extends StatefulWidget {
 class _AddTodoDialogueState extends State<AddTodoDialogue> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
+  TodoList listItem = TodoList();
+  Widget taskdisplay = Row(
+    children: const [
+      Center(
+        child: Center(child: Text("Yay! No Pending Tasks")),
+      )
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -38,15 +49,19 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                     controller: desccontroller,
                   ),
                   TextButton(
-                    child: const Text("Add Task"),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TodoScreen(),
-                          ));
-                    },
-                  ),
+                      child: const Text("Add"),
+                      onPressed: () {
+                        if (titlecontroller.text.isNotEmpty &&
+                            desccontroller.text.isNotEmpty) {
+                          setState(() {
+                            Todo content = Todo(
+                                title: titlecontroller.text,
+                                description: desccontroller.text);
+
+                            Navigator.of(context).pop(content);
+                          });
+                        }
+                      }),
                 ],
               ),
             )));

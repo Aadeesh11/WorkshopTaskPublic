@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workshop_task/screen/todo_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,4 +21,7 @@ class MyApp extends StatelessWidget {
       home: Container(),
     );
   }
+  runApp(const MaterialApp(
+    home: TodoScreen(),
+  ));
 }

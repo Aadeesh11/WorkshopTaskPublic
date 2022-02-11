@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workshop_task/models/todo.dart';
+
 import 'package:workshop_task/models/todo_list.dart';
-import 'package:workshop_task/widgets/todo_list_item.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
@@ -12,7 +11,7 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   TodoList todoList = TodoList();
-  final List<Todo> _allTodos = <Todo>[];
+
   List<Widget> listWig = <Widget>[];
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
@@ -35,8 +34,6 @@ class _TodoScreenState extends State<TodoScreen> {
         appBar: AppBar(
           title: const Text("Your Todos"),
         ),
-
-        //TODO: Add todo button with this icon => "+".
         floatingActionButton: FloatingActionButton(
             child: const Icon(
               Icons.add_outlined,
@@ -153,6 +150,6 @@ class _TodoScreenState extends State<TodoScreen> {
                                 ))));
                   });
             }),
-        body: wibody); //TODO: Add list view displaying all todo.
+        body: wibody);
   }
 }

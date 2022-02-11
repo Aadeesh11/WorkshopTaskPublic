@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:workshop_task/models/todo_list.dart';
-
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
 
@@ -10,9 +8,6 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  TodoList todoList = TodoList();
-
-  List<Widget> listWig = <Widget>[];
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffyKey = GlobalKey<ScaffoldState>();
@@ -36,7 +31,7 @@ class _TodoScreenState extends State<TodoScreen> {
         ),
         floatingActionButton: FloatingActionButton(
             child: const Icon(
-              Icons.add_outlined,
+              Icons.add,
               size: 35,
             ),
             onPressed: () {
@@ -66,7 +61,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                             labelText: "Description",
                                             hintText: 'Description')),
                                     SizedBox(
-                                        width: 330.0,
+                                        width: 320.0,
                                         child: TextButton(
                                             onPressed: () {
                                               if (titlecontroller

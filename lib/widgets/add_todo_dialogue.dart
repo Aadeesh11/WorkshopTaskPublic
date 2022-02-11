@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo.dart';
 import 'package:workshop_task/models/todo_list.dart';
-import 'package:workshop_task/screen/todo_screen.dart';
 
 class AddTodoDialogue extends StatefulWidget {
   const AddTodoDialogue({Key key}) : super(key: key);
@@ -57,7 +56,6 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                             Todo content = Todo(
                                 title: titlecontroller.text,
                                 description: desccontroller.text);
-
                             Navigator.of(context).pop(content);
                           });
                         }

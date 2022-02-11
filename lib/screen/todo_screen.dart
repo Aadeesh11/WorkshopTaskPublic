@@ -29,7 +29,12 @@ class _TodoScreenState extends State<TodoScreen> {
           title: const Text("My Tasks"),
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add, size: 50),
+          child: const Icon(
+            Icons.add,
+            size: 35,
+            color: Colors.black,
+          ),
+          backgroundColor: Colors.amber,
           onPressed: () {
             showDialog(
                 context: context,
@@ -41,6 +46,30 @@ class _TodoScreenState extends State<TodoScreen> {
               if (value != null) {
                 setState(() {
                   todoList.addTodo(value);
+                  GestureDetector(onDoubleTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("DELETE TASK"),
+                            content: const Text(
+                                "Are you sure you want to delete this task"),
+                            actions: [
+                              TextButton(
+                                  child: const Text("YES"),
+                                  onPressed: () {
+                                    todoList.deleteTodo(value);
+                                    Navigator.of(context).pop();
+                                  }),
+                              TextButton(
+                                  child: const Text("NO"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  })
+                            ],
+                          );
+                        });
+                  });
                 });
               }
             });
@@ -56,17 +85,12 @@ class _TodoScreenState extends State<TodoScreen> {
                   );
                 }),
                 itemCount: todoList.allTodos().length,
-              ) /*ListView(
-        children: [
-          GestureDetector(
-            child: ListTile(
-              title: Text(titlecontroller.text),
-              subtitle: Text(desccontroller.text),
-            ),
-          )
-        ],
-      ),*/
-        );
+              ));
     return scaffold;
   }
 }
+
+
+/*
+
+                  */

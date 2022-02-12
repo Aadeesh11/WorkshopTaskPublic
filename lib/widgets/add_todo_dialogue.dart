@@ -12,6 +12,7 @@ class AddTodoDialogue extends StatefulWidget {
 class _AddTodoDialogueState extends State<AddTodoDialogue> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
+
   int i = 0;
   TodoList listItem = TodoList();
   List<Widget> listWig = <Widget>[];
@@ -46,9 +47,9 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                                     title: titlecontroller.text,
                                     description: desccontroller.text);
 
-                                listItem.addTodo(content);
                                 titlecontroller.clear();
                                 desccontroller.clear();
+                                Navigator.pop(context, content);
                               }
                             });
                           },

@@ -11,6 +11,9 @@ class TodoListItem extends StatelessWidget {
     return ListTile(
       title: Text(todo.title),
       subtitle: Text(todo.description),
+      leading: CircleAvatar(
+        child: Text("$index"),
+      ),
     );
   }
 }

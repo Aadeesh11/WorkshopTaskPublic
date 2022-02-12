@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_task/models/todo_list.dart';
-import 'package:workshop_task/models/todo.dart';
+
+import 'package:workshop_task/widgets/add_todo_dialogue.dart';
+import 'package:workshop_task/widgets/todo_list_item.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
@@ -10,8 +12,8 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  final TextEditingController controller1 = TextEditingController();
-  final TextEditingController controller2 = TextEditingController();
+  // final TextEditingController controller1 = TextEditingController();
+  // final TextEditingController controller2 = TextEditingController();
 
   TodoList todoList = TodoList();
 
@@ -38,56 +40,13 @@ class _TodoScreenState extends State<TodoScreen> {
         onPressed: () {
           showDialog(
               context: context,
-              builder: (BuildContext context) {
-                return Dialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: SizedBox(
-                        child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                TextField(
-                                  controller: controller1,
-                                  decoration:
-                                      const InputDecoration(labelText: "Title"),
-                                ),
-                                TextField(
-                                  controller: controller2,
-                                  decoration: const InputDecoration(
-                                      labelText: "Description"),
-                                ),
-                                const SizedBox(height: 20),
-                                SizedBox(
-                                    child: TextButton(
-                                  child: const Text("SUBMIT"),
-                                  onPressed: () {
-                                    if (controller1.text.isNotEmpty &&
-                                        controller2.text.isNotEmpty) {
-                                      setState(() {
-                                        String title = controller1.text;
-                                        String description = controller2.text;
-
-                                        Todo newTodo = Todo(
-                                            title: title,
-                                            description: description);
-
-                                        todoList.addTodo(newTodo);
-
-                                        controller1.clear();
-                                        controller2.clear();
-
-                                        Navigator.of(context).pop();
-                                      });
-                                    }
-                                  },
-                                ))
-                              ],
-                            ))));
-              });
+              builder: (BuildContext context2) {
+                return const AddTodoDialogue();
+              }).then((value) {
+            setState(() {
+              todoList.addTodo(value);
+            });
+          });
         },
       ),
       body: todoList.allTodos().isNotEmpty
@@ -122,12 +81,8 @@ class _TodoScreenState extends State<TodoScreen> {
                             );
                           });
                     },
-                    child: ListTile(
-                      title: Text(todoList.allTodos()[index].title,
-                          style: const TextStyle(fontSize: 18.0)),
-                      subtitle: Text(todoList.allTodos()[index].description),
-                      leading: CircleAvatar(child: Text("${index + 1}")),
-                    ));
+                    child: TodoListItem(
+                        todo: todoList.allTodos()[index], index: index));
               })
           : const Center(child: Text("No Todo's added")),
     );

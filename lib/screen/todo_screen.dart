@@ -57,7 +57,7 @@ class _TodoScreenState extends State<TodoScreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              content: Text(
+                              content: const Text(
                                   "Are you sure you want to delete this todo"),
                               actions: [
                                 TextButton(
@@ -65,12 +65,12 @@ class _TodoScreenState extends State<TodoScreen> {
                                       Todo content = doList.allTodos()[index];
                                       Navigator.pop(context, content);
                                     },
-                                    child: Text("Yes")),
+                                    child: const Text("Yes")),
                                 TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("No"))
+                                    child: const Text("No"))
                               ],
                             );
                           }).then((value) {

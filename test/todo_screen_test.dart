@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:workshop_task/screen/todo_screen.dart';
+import 'package:workshop_task/widgets/add_todo_dialogue.dart';
+import 'package:workshop_task/widgets/todo_list_item.dart';
 
 Widget createHomeScreen() => const MaterialApp(
       home: TodoScreen(),
@@ -33,6 +35,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byIcon(Icons.add).first);
       await tester.pumpAndSettle();
+      expect(tester.widgetList(find.byType(AddTodoDialogue)).length, 1);
       expect(tester.widgetList(find.byType(Dialog)).length, 1);
       var textfields = tester.widgetList(find.byType(TextField));
       expect(textfields.length, 2);
@@ -54,6 +57,7 @@ void main() {
       expect(tester.widgetList(find.textContaining('d')).isNotEmpty, true);
 
       expect(tester.widgetList(find.byType(ListView)).isNotEmpty, true);
+      expect(tester.widgetList(find.byType(TodoListItem)).isNotEmpty, true);
 
       await tester.tap(find.textContaining('t'));
       await tester.pump(kDoubleTapMinTime); // <- Add this

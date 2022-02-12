@@ -1,7 +1,7 @@
 import 'package:workshop_task/models/todo.dart';
 
 class TodoList {
-  final List<Todo> _allTodos = [];
+  final List<Todo> _allTodos = <Todo>[];
 
   List<Todo> allTodos() {
     return _allTodos;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workshop_task/models/todo.dart';
 import 'package:workshop_task/models/todo_list.dart';
+import 'package:workshop_task/widgets/todo_list_item.dart';
+import 'package:workshop_task/widgets/add_todo_dialogue.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key key}) : super(key: key);
@@ -11,7 +12,6 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   var todoListObject = TodoList();
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   Widget zeroTodos = Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -35,15 +35,8 @@ class _TodoScreenState extends State<TodoScreen> {
               itemCount: todoListObject.allTodos().length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                    child: ListTile(
-                      title: Text(todoListObject.allTodos()[index].title),
-                      subtitle:
-                          Text(todoListObject.allTodos()[index].description),
-                      leading: CircleAvatar(
-                        child: Text("${index + 1}"),
-                        backgroundColor: const Color(0xFF000000),
-                      ),
-                    ),
+                    child: TodoListItem(
+                        todo: todoListObject.allTodos()[index], index: index),
                     onDoubleTap: () {
                       showDialog(
                           context: context,
@@ -79,63 +72,12 @@ class _TodoScreenState extends State<TodoScreen> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  final TextEditingController titleEditingController =
-                      TextEditingController();
-                  final TextEditingController descEditingController =
-                      TextEditingController();
-                  return AlertDialog(
-                    content: Form(
-                        key: _formkey,
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Title:"),
-                              TextFormField(
-                                controller: titleEditingController,
-                                validator: (value) {
-                                  return value.isNotEmpty
-                                      ? null
-                                      : "Invalid Field";
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: "Enter Title!"),
-                              ),
-                              const SizedBox(height: 10.0),
-                              const Text("Description:"),
-                              TextFormField(
-                                controller: descEditingController,
-                                validator: (value) {
-                                  return value.isNotEmpty
-                                      ? null
-                                      : "Invalid Field";
-                                },
-                                decoration: const InputDecoration(
-                                    hintText: "Enter Description!"),
-                              ),
-                            ])),
-                    actions: [
-                      TextButton(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text("Submit"),
-                            ]),
-                        onPressed: () {
-                          if (_formkey.currentState.validate()) {
-                            var newTodo = Todo(
-                                title: titleEditingController.text,
-                                description: descEditingController.text);
-                            setState(() {
-                              todoListObject.addTodo(newTodo);
-                            });
-                            Navigator.of(context).pop();
-                          }
-                        },
-                      )
-                    ],
-                  );
-                });
+                  return const AddTodoDialogue();
+                }).then((value) {
+              setState(() {
+                todoListObject.addTodo(value);
+              });
+            });
           },
           child: const Icon(Icons.add, size: 35)),
       bottomNavigationBar: BottomAppBar(

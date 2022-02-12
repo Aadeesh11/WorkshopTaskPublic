@@ -45,9 +45,9 @@ class _AddTodoDialogueState extends State<AddTodoDialogue> {
                                     title: titlecontroller.text,
                                     description: desccontroller.text);
 
-                                listItem.addTodo(content);
                                 titlecontroller.clear();
                                 desccontroller.clear();
+                                Navigator.pop(context, content);
                               }
                             });
                           },

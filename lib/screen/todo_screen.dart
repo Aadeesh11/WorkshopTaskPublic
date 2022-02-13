@@ -14,6 +14,8 @@ class _TodoScreenState extends State<TodoScreen> {
   final TextEditingController titlecontroller = TextEditingController();
   final TextEditingController desccontroller = TextEditingController();
   Widget taskdisplay = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: const [
       Center(
         child: Center(child: Text("Yay! No Pending Tasks")),
@@ -46,30 +48,6 @@ class _TodoScreenState extends State<TodoScreen> {
               if (value != null) {
                 setState(() {
                   todoList.addTodo(value);
-                  GestureDetector(onDoubleTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text("DELETE TASK"),
-                            content: const Text(
-                                "Are you sure you want to delete this task"),
-                            actions: [
-                              TextButton(
-                                  child: const Text("YES"),
-                                  onPressed: () {
-                                    todoList.deleteTodo(value);
-                                    Navigator.of(context).pop();
-                                  }),
-                              TextButton(
-                                  child: const Text("NO"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  })
-                            ],
-                          );
-                        });
-                  });
                 });
               }
             });
@@ -79,9 +57,38 @@ class _TodoScreenState extends State<TodoScreen> {
             ? taskdisplay
             : ListView.builder(
                 itemBuilder: ((context, index) {
-                  return TodoListItem(
-                    index: index,
-                    todo: todoList.allTodos()[index],
+                  return GestureDetector(
+                    onDoubleTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("DELETE TASK"),
+                              content: const Text(
+                                  "Are you sure you want to delete this task"),
+                              actions: [
+                                TextButton(
+                                    child: const Text("YES"),
+                                    onPressed: () {
+                                      setState(() {
+                                        todoList.deleteTodo(
+                                            todoList.allTodos()[index]);
+                                        Navigator.of(context).pop();
+                                      });
+                                    }),
+                                TextButton(
+                                    child: const Text("NO"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    })
+                              ],
+                            );
+                          });
+                    },
+                    child: TodoListItem(
+                      index: index,
+                      todo: todoList.allTodos()[index],
+                    ),
                   );
                 }),
                 itemCount: todoList.allTodos().length,
@@ -89,8 +96,3 @@ class _TodoScreenState extends State<TodoScreen> {
     return scaffold;
   }
 }
-
-
-/*
-
-                  */

@@ -41,9 +41,7 @@ class _TodoScreenState extends State<TodoScreen> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const Dialog(
-                    child: AddTodoDialogue(),
-                  );
+                  return const AddTodoDialogue();
                 }).then((value) {
               if (value != null) {
                 setState(() {
@@ -68,7 +66,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                   "Are you sure you want to delete this task"),
                               actions: [
                                 TextButton(
-                                    child: const Text("YES"),
+                                    child: const Text("Yes"),
                                     onPressed: () {
                                       setState(() {
                                         todoList.deleteTodo(
@@ -77,7 +75,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                       });
                                     }),
                                 TextButton(
-                                    child: const Text("NO"),
+                                    child: const Text("No"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     })

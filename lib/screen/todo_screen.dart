@@ -39,11 +39,10 @@ class _TodoScreenState extends State<TodoScreen> {
         child: const Icon(Icons.add),
         onPressed: () {
           showDialog(
-            context: context,
-            builder: (BuildContext context2) {
-              return const AddTodoDialogue();
-            },
-          ).then((value) {
+              context: context,
+              builder: (BuildContext context2) {
+                return const AddTodoDialogue();
+              }).then((value) {
             setState(() {
               todoList.addTodo(value);
             });
